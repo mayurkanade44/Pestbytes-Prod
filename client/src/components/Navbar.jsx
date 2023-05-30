@@ -47,9 +47,10 @@ const Navbar = () => {
 
   const logoutHandler = async () => {
     try {
-      const res = await logoutUser();
+      const res = await logoutUser().unwrap();
       dispatch(logout());
       toast.success(res.msg);
+      navigate("/");
       navVisibilityHandler();
     } catch (error) {
       console.log(error);

@@ -201,7 +201,7 @@ export const logoutUser = (req, res) => {
     httpOnly: true,
     expires: new Date(0),
   });
-  res.status(200).json({ message: "Logged out successfully" });
+  res.status(200).json({ msg: "Logged out successfully" });
 };
 
 export const getUserProfile = async (req, res) => {

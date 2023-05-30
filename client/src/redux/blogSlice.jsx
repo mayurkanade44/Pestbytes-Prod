@@ -6,6 +6,7 @@ export const blogSlice = apiSlice.injectEndpoints({
       query: (id) => ({
         url: `/api/blog/singleBlog/${id}`,
       }),
+      providesTags: ["Blog"],
     }),
     addComment: builder.mutation({
       query: ({ data, blogId }) => ({
@@ -60,6 +61,7 @@ export const blogSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Blog"],
     }),
     updateBlog: builder.mutation({
       query: ({ data, id }) => ({
@@ -67,11 +69,12 @@ export const blogSlice = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["Blog"],
     }),
     deleteBlog: builder.mutation({
       query: (id) => ({
         url: `/api/blog/singleBlog/${id}`,
-        method:"DELETE",
+        method: "DELETE",
       }),
     }),
   }),
@@ -88,5 +91,5 @@ export const {
   useSearchBlogsQuery,
   useCreateBlogMutation,
   useUpdateBlogMutation,
-  useDeleteBlogMutation
+  useDeleteBlogMutation,
 } = blogSlice;

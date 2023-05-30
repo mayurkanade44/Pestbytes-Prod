@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.quill h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.quill h2 {
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.quill .ql-align-center {
+  display: flex;
+  justify-content: center;
+}
+
+.quill .ql-align-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.quill .ql-align-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.quill ul {
+  list-style-position: inside;
+  list-style-type: disc;
+  max-width: 100%;
+  padding: 0;
+}
+
+.quill li {
+  padding: 0 0 0 1rem;
+  font-weight: 500;
+}
+
+

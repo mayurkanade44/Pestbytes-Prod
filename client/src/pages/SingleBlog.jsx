@@ -167,7 +167,9 @@ const SingleBlog = () => {
               Share on:
             </h2>
             <SocialShare
-              url={encodeURI(`http://localhost:3000/blog/${blog?._id}`)}
+              url={encodeURI(
+                `https://pestbytes.onrender.com/blog/${blog?._id}`
+              )}
               title={encodeURIComponent(`Pestbytes - ${blog?.title}`)}
             />
           </div>

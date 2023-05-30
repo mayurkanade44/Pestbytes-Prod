@@ -45,21 +45,12 @@ const Home = () => {
 
   const optimizedDebounce = useMemo(() => debounce(), []);
 
-  const searchCategory = ({ category, name }) => {
-    dispatch(
-      setSearch({
-        title: "",
-        category: category,
-        name: name,
-      })
-    );
-    navigate(`/all-blogs`);
-  };
+  
 
   return (
     <div>
       <section className="container mx-auto flex flex-col px-5 py-5 lg:flex-row">
-        <div className="mt-8 lg:w-1/2">
+        <div className="mt-0 md:mt-8 lg:w-1/2">
           <h1 className="font-roboto text-3xl text-center font-bold text-dark-soft md:text-5xl lg:text-4xl xl:text-5xl lg:text-left lg:max-w-[540px]">
             India's First Community Of Pest Bloggers
           </h1>

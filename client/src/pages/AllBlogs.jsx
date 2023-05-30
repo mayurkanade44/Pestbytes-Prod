@@ -26,8 +26,6 @@ const AllBlogs = () => {
   });
   const { data: categories } = useAllCategoriesQuery();
 
-  console.log(data);
-
   useEffect(() => {
     setTempSearch(search.title);
     window.scrollTo(0, 0);

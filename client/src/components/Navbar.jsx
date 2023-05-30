@@ -11,13 +11,17 @@ import { toast } from "react-toastify";
 const navItemsInfo = [
   { name: "Home", type: "link", href: "/" },
   { name: "About Us", type: "link", href: "/about-pestbytes" },
-  { name: "Contact Us", type: "link", href: "/contact" },
+  { name: "Contact Us", type: "link", href: "/" },
 ];
 
-const NavItems = ({ name, href }) => {
+const NavItems = ({ name, href, setNavIsVisible }) => {
   return (
     <li className="relative group">
-      <Link to={href} className="px-4 py-2 hover:text-blue-500">
+      <Link
+        to={href}
+        className="px-4 py-2 hover:text-blue-500"
+        onClick={setNavIsVisible}
+      >
         {name}
       </Link>
       <span className="cursor-pointer text-blue-500 absolute transition-all duration-500 font-bold right-0 top-0 group-hover:right-[90%] opacity-0 group-hover:opacity-100">
@@ -46,6 +50,7 @@ const Navbar = () => {
       const res = await logoutUser();
       dispatch(logout());
       toast.success(res.msg);
+      navVisibilityHandler();
     } catch (error) {
       console.log(error);
     }
@@ -53,6 +58,7 @@ const Navbar = () => {
 
   const addBlog = () => {
     dispatch(setNewBlog({ status: true, blogId: "" }));
+    navVisibilityHandler();
     navigate("/add-blog");
   };
   return (
@@ -80,7 +86,12 @@ const Navbar = () => {
         >
           <ul className="text-white items-center gap-y-7 lg:text-dark-soft flex flex-col lg:flex-row gap-x-2 font-semibold">
             {navItemsInfo.map((item) => (
-              <NavItems key={item.name} name={item.name} href={item.href} />
+              <NavItems
+                key={item.name}
+                name={item.name}
+                href={item.href}
+                setNavIsVisible={navVisibilityHandler}
+              />
             ))}
           </ul>
           {user ? (
@@ -117,6 +128,7 @@ const Navbar = () => {
                       <Link
                         to={`/profile/${user.userId}`}
                         className="hover:bg-dark-hard hover:text-white px-4 py-2 text-white lg:text-dark-soft"
+                        onClick={navVisibilityHandler}
                       >
                         Profile
                       </Link>
@@ -135,6 +147,7 @@ const Navbar = () => {
           ) : (
             <Link
               to="/login"
+              onClick={navVisibilityHandler}
               className="mt-8 lg:mt-0 border-2 border-blue-500 px-4 py-1 rounded-full text-blue-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300"
             >
               Log In

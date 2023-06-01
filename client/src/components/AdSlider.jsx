@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import temp from "../assets/temp.jpg";
+import temp from "../assets/Temp.jpg";
 import temp1 from "../assets/temp2.jpg";
 import ad from "../assets/eppl.jpg";
 

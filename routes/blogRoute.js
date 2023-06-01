@@ -11,12 +11,14 @@ import {
   likeBlog,
   searchBlogs,
   updateBlog,
+  uploadBlogImages,
 } from "../controllers/blogController.js";
 const router = express.Router();
 
 router.route("/").post(authenticateUser, createBlog).get(getAllBlogs);
 router.route("/search").get(searchBlogs)
 router.route("/singleBlog/like/:id").patch(authenticateUser, likeBlog);
+router.route("/blogImage").post(uploadBlogImages)
 
 router
   .route("/singleBlog/:id")

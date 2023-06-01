@@ -18,7 +18,7 @@ export const registerUser = async (req, res) => {
     const verificationToken = crypto.randomBytes(40).toString("hex");
 
     const newName = capitalLetter(name);
-    const link = `${process.env.URL}/verify-account?token=${verificationToken}&email=${email}`;
+    const link = `https://pestbytes.com/verify-account?token=${verificationToken}&email=${email}`;
     const mail = await sendEmail({
       newName,
       email,
@@ -141,7 +141,7 @@ export const forgotPassword = async (req, res) => {
 
       await user.save();
 
-      const link = `${process.env.URL}/reset-password?token=${passwordToken}&email=${email}`;
+      const link = `https://pestbytes.com/reset-password?token=${passwordToken}&email=${email}`;
 
       const mail = await sendEmail({
         name: user.name,

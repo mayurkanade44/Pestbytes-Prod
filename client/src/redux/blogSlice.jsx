@@ -33,7 +33,9 @@ export const blogSlice = apiSlice.injectEndpoints({
         url: `/api/blog/singleBlog/like/${id}`,
         method: "PATCH",
       }),
+      invalidatesTags: ["User"],
     }),
+
     allBlogs: builder.query({
       query: () => ({
         url: "/api/blog",
@@ -77,6 +79,13 @@ export const blogSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
+    uploadBlogImage: builder.mutation({
+      query: (data) => ({
+        url: "/api/blog/blogImage",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -92,4 +101,5 @@ export const {
   useCreateBlogMutation,
   useUpdateBlogMutation,
   useDeleteBlogMutation,
+  useUploadBlogImageMutation,
 } = blogSlice;

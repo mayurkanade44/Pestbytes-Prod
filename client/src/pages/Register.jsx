@@ -181,7 +181,7 @@ const Register = () => {
             </Link>
           </p>
         </form>
-        <div className="inline-flex items-center justify-center w-full">
+        {/* <div className="inline-flex items-center justify-center w-full">
           <hr className="w-2/3 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
           <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2">
             OR
@@ -192,7 +192,7 @@ const Register = () => {
           className=" text-black font-bold py-2 px-5 w-full rounded-lg mb-4 border-black border-[1px]"
         >
           <FcGoogle className="absolute" size={24} /> Login With Google
-        </button>
+        </button> */}
       </div>
     </section>
   );

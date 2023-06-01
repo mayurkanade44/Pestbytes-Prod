@@ -8,11 +8,19 @@ const AboutUs = () => {
           About Pestbytes
         </h2>
         <p className="font-normal text-base leading-6 text-gray-600 mt-6">
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout. The point of
-          using Lorem Ipsum.In the first place we have granted to God, and by
-          this our present charter confirmed for us and our heirs forever that
-          the English Church shall be free, and shall have her rights entire,
+          It started as an talkathon idea between 2 individuals to create a
+          space neutral but must be cohesive and collaborative in every sense of
+          its expression. Where one would put words to text and the other would
+          ideate. Pestbytes was registered in 2020, but stayed in incubation for
+          3 years, bouncing around, seeking collaboration through the years that
+          passed and then in 2023 the pivot was to create a platform to
+          influence a new pattern of collaborative learning not just keeping it
+          focused on a fixed set of writers but opening it up to all communities
+          and spectrum of contributors. Pestbytes in 2023 collaborated putting
+          together mind and technology to create a platform open to becoming a
+          central space where knowledge sharing and innovation announcement is
+          done with pride, encouraging a whole new generation of entrepreneurs
+          to share, learn, comment, and build knowledge.
         </p>
       </div>
       <div className="mt-5">
@@ -70,6 +78,17 @@ const AboutUs = () => {
           />
         </div>
       </div>
+      <div className="w-full">
+        <h2 className="w-full font-bold text-center text-gray-800 lg:text-4xl text-3xl lg:leading-10 leading-9 mt-8">
+          What’s to be published
+        </h2>
+        <p className="font-normal text-base leading-6 text-gray-600 mt-6">
+          The discussion topics can include some research based information,
+          some experience based stories and anecdotes, some loud-mouthed
+          opinion.   We are keeping it simple, just one image and load your
+          text..
+        </p>
+      </div>
       <div className="lg:mt-16 sm:mt-12 mt-16 flex lg:flex-row justify-between flex-col lg:gap-8 gap-12">
         <div className="lg:flex items-center w-full lg:w-1/2 ">
           <img
@@ -104,7 +123,7 @@ const AboutUs = () => {
             of a subject.
             <br />
             <br /> Right triangle It’s three tips (investigation)(fact)(new
-            conclusion) Research:: the systematic investigation into and study
+            conclusion) Research, he systematic investigation into and study
             of materials and sources in order to establish facts and reach new
             conclusions. <br />
             <br />

@@ -71,9 +71,8 @@ export const updateBlog = async (req, res) => {
     if (blog.user.toString() !== req.user._id.toString())
       return res.status(401).json({ msg: "Access denied" });
 
-  
     if (req.files) {
-      const  link = await uploadImage(req.files.coverPic.tempFilePath);
+      const link = await uploadImage(req.files.coverPic.tempFilePath);
       blog.coverPicture = link;
 
       if (!link)
@@ -258,10 +257,23 @@ export const searchBlogs = async (req, res) => {
       ])
       .select("title coverPicture body createdAt")
       .sort("-createdAt")
-      .limit(2)
-      .skip(2 * (page - 1));
+      .limit(5)
+      .skip(5 * (page - 1));
 
-    res.json({ blogs, pages: Math.ceil(count / 2) });
+    res.json({ blogs, pages: Math.ceil(count / 5) });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Server error, try again later." });
+  }
+};
+
+export const uploadBlogImages = async (req, res) => {
+  try {
+    if (req.files) {
+      const link = await uploadImage(req.files.image.tempFilePath);
+      if (link) return res.json(link);
+    }
+    res.status(400).json({ msg: "Image upload error, trg again later" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: "Server error, try again later." });

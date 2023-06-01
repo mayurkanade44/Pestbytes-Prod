@@ -19,7 +19,7 @@ const AllBlogs = () => {
     { name: search.name },
   ];
 
-  const { data, isLoading, refetch } = useSearchBlogsQuery({
+  const { data, isLoading } = useSearchBlogsQuery({
     search: search.title,
     category: search.category,
     page: page,
@@ -48,6 +48,7 @@ const AllBlogs = () => {
       setTempSearch(e.target.value);
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
+        r;
         dispatch(
           setSearch({
             title: e.target.value,
@@ -135,7 +136,9 @@ const AllBlogs = () => {
                     {blog.title}
                   </h5>
                   <div className="mb-1 md:mb-3 text-red-600 font-medium text-sm flex items-center justify-center md:justify-start">
-                    {blog?.category.map((c) => `#${c.label} `)}
+                    {blog?.category.map(
+                      (c) => `#${c.label.replaceAll(" ", "")} `
+                    )}
                   </div>
                   <p className="text-gray-500 mb-2">
                     <small>
@@ -167,15 +170,10 @@ const AllBlogs = () => {
           {pages.length > 1 && (
             <nav aria-label="Page navigation example">
               <ul className="list-style-none flex justify-center">
-                <li className="pr-1">
-                  <button className="relative block rounded bg-transparent px-3 py-1.5 text-sm transition-all duration-30 bg-neutral-700 text-white hover:bg-blue-400">
-                    Previous
-                  </button>
-                </li>
                 {pages.map((item) => (
                   <li className="pr-1" key={item}>
                     <button
-                      className={`relative block rounded bg-transparent px-3 py-1.5 text-sm transition-all duration-30  ${
+                      className={`relative block rounded px-3 py-1.5 text-sm transition-all duration-30  ${
                         page === item ? "bg-blue-400" : "bg-neutral-700"
                       } text-white hover:bg-blue-400`}
                       onClick={() => setPage(item)}
@@ -184,11 +182,6 @@ const AllBlogs = () => {
                     </button>
                   </li>
                 ))}
-                <li>
-                  <button className="relative block rounded bg-transparent px-3 py-1.5 text-sm transition-all duration-30 bg-neutral-700 text-white hover:bg-blue-400">
-                    Next
-                  </button>
-                </li>
               </ul>
             </nav>
           )}

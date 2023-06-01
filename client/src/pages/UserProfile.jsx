@@ -17,10 +17,14 @@ const UserProfile = () => {
   const { user } = useSelector((store) => store.auth);
   const { data, refetch, isLoading, error } = useGetUserProfileQuery(id);
   const [open, setOpen] = useState(false);
+  const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    if (data) {
+      setBlogs(data.blogs);
+    }
+  }, [data]);
 
   const goBack = () => {
     setOpen(!open);
@@ -62,9 +66,9 @@ const UserProfile = () => {
               </div>
               <div className="hidden md:block">
                 <p>{data?.aboutMe}</p>
-                <span>
+                {/* <span>
                   <strong>www.bytewebster.com</strong>
-                </span>
+                </span> */}
                 <div className="w-full flex justify-start mt-2">
                   <a
                     target="_blank"
@@ -89,19 +93,30 @@ const UserProfile = () => {
                   </a>
                 </div>
               </div>
-              <ul className="hidden md:flex space-x-8 mt-5">
+              <ul className="hidden md:flex justify-around mt-8">
                 <li>
-                  <span className="font-semibold mr-1">
-                    {data?.blogs.length}
-                  </span>
-                  Blogs
+                  <button
+                    className="pointer hover:font-bold"
+                    onClick={() => setBlogs(data?.blogs)}
+                  >
+                    <span className="font-semibold mr-1">
+                      {data?.blogs.length}
+                    </span>
+                    Blogs
+                  </button>
                 </li>
                 <li>
-                  <span className="font-semibold mr-1">
-                    {data?.favorites.length}
-                  </span>
-                  Favorites
+                  <button
+                    className="pointer hover:font-bold"
+                    onClick={() => setBlogs(data?.favorites)}
+                  >
+                    <span className="font-semibold mr-1">
+                      {data?.favorites.length}
+                    </span>
+                    Favorites
+                  </button>
                 </li>
+                <li></li>
               </ul>
             </div>
             <hr />
@@ -141,20 +156,24 @@ const UserProfile = () => {
                 text-center p-2 text-gray-600 leading-snug text-sm"
             >
               <li>
-                <span className="font-semibold text-gray-800 block">
-                  {data?.blogs.length}
-                </span>
-                Blogs
+                <button onClick={() => setBlogs(data?.blogs)}>
+                  <span className="font-semibold text-gray-800 block">
+                    {data?.blogs.length}
+                  </span>
+                  Blogs
+                </button>
               </li>
               <li>
-                <span className="font-semibold text-gray-800 block">
-                  {data?.favorites.length}
-                </span>
-                Favorites
+                <button onClick={() => setBlogs(data?.favorites)}>
+                  <span className="font-semibold text-gray-800 block">
+                    {data?.favorites.length}
+                  </span>
+                  Favorites
+                </button>
               </li>
             </ul>
             <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-10 px-3">
-              {data?.blogs.map((blog) => (
+              {blogs?.map((blog) => (
                 <BlogCard
                   key={blog._id}
                   blog={blog}

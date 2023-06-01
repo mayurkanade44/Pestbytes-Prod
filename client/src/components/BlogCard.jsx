@@ -5,9 +5,12 @@ import { useDispatch } from "react-redux";
 import { setNewBlog } from "../redux/authSlice";
 import { toast } from "react-toastify";
 import { useDeleteBlogMutation } from "../redux/blogSlice";
+import DeleteModal from "./DeleteModal";
+import { useState } from "react";
 
 const BlogCard = ({ blog, className, profile, refetch }) => {
   const [deleteBlog, { isLoading }] = useDeleteBlogMutation();
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleEdit = () => {
@@ -35,29 +38,52 @@ const BlogCard = ({ blog, className, profile, refetch }) => {
     <div
       className={`rounded-xl overflow-hidden shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] ${className}`}
     >
-      <div className="relative">
-        <Link to={`/blog/${blog._id}`}>
-          <img
-            src={blog.coverPicture}
-            alt="Image"
-            className="w-full h-60 rounded-lg"
-          />
-        </Link>
-        {profile && (
-          <div className="absolute top-0 right-1 p-3 flex">
-            <button onClick={handleEdit}>
-              <FaRegEdit className="text-cyan-600 w-8 h-8 p-1  hover:border-2 mr-3" />
-            </button>
-            <button onClick={() => handleDelete(blog._id)}>
-              <AiOutlineDelete className="text-red-500 w-8 h-8 p-1  hover:border-2" />
-            </button>
-          </div>
-        )}
-      </div>
       <Link to={`/blog/${blog._id}`}>
-        <div className="py-2 px-4">
-          <h2 className="font-roboto font-bold text-xl text-dark-soft md:text-2xl lg:text-[28px]">
-            {blog.title.substring(0, 26)}
+        <img
+          src={blog.coverPicture}
+          alt="Image"
+          className="w-full h-60 rounded-lg border-b-2"
+        />
+      </Link>
+      {profile && (
+        <div className=" flex justify-center">
+          <button onClick={handleEdit}>
+            <FaRegEdit className="text-cyan-600 w-8 h-8 p-1  bg-slate-100 hover:bg-black mr-3" />
+          </button>
+          <button onClick={() => setOpen(true)}>
+            <AiOutlineDelete className="text-red-500 w-8 h-8 p-1  bg-slate-100  hover:bg-black  " />
+          </button>
+        </div>
+      )}
+      <DeleteModal open={open}>
+        <div className="text-center w-60">
+          <AiOutlineDelete className="text-red-500 mx-auto w-10 h-10" />
+          <div className="mx-auto my-4 w-48">
+            <h3 className="text-lg font-black text-gray-800">Confirm Delete</h3>
+            <p className="text-sm text-gray-500">
+              Are you sure you want delete this blog?
+            </p>
+          </div>
+          <div className="flex gap-4">
+            <div
+              onClick={() => handleDelete(blog._id)}
+              className="btn bg-red-700 w-full rounded-md text-white py-1 cursor-pointer"
+            >
+              Delete
+            </div>
+            <div
+              onClick={() => setOpen(false)}
+              className="btn  bg-gray-200 w-full rounded-md text-dark py-1 font-semibold cursor-pointer"
+            >
+              Cancel
+            </div>
+          </div>
+        </div>
+      </DeleteModal>
+      <Link to={`/blog/${blog._id}`}>
+        <div className="pb-2 pt-1 px-4">
+          <h2 className="font-roboto font-bold text-xl text-dark md:text-[25px]">
+            {blog.title.substring(0, 30)}
           </h2>
           <div className="flex justify-between flex-nowrap items-center mt-2">
             <div className="flex items-center gap-x-2 md:gap-x-2.5">

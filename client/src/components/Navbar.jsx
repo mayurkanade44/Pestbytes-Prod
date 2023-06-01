@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logo from "../assets/logo.jpg";
+import logo from "../assets/logo1.jpg";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
@@ -67,7 +67,7 @@ const Navbar = () => {
       <header className="container mx-auto px-5 flex justify-between py-4 items-center">
         <div>
           <Link to="/">
-            <img src={logo} className="w-10" alt="logo" />
+            <img src={logo} className="w-12" alt="logo" />
           </Link>
         </div>
         <div className="lg:hidden z-50">

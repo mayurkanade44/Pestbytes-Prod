@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import ReactQuill from "react-quill";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import {
   useAllCategoriesQuery,
   useCreateBlogMutation,
   useGetSingleBlogQuery,
   useUpdateBlogMutation,
+  useUploadBlogImageMutation,
 } from "../redux/blogSlice";
 import { toast } from "react-toastify";
 import { AiOutlineCloudUpload } from "react-icons/ai";
@@ -14,10 +15,13 @@ import { Modal } from "../components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setNewBlog } from "../redux/authSlice";
+import { Loading } from "../components/skeletons";
 
 const AddBlog = () => {
   const [value, setValue] = useState("");
   const [postBlog, { isLoading: postBlogLoading }] = useCreateBlogMutation();
+  const [uploadBlogImage, { isLoading: blogImageLoading }] =
+    useUploadBlogImageMutation();
   const [updateBlog, { isLoading: updateBlogLoading }] =
     useUpdateBlogMutation();
   const { newBlog, user } = useSelector((store) => store.auth);
@@ -31,6 +35,7 @@ const AddBlog = () => {
   });
   const [selectedOption, setSelectedOption] = useState([]);
   const navigate = useNavigate();
+  const ref = useRef();
 
   const { data: blog, error } = useGetSingleBlogQuery(newBlog.blogId, {
     skip: newBlog.status,
@@ -59,15 +64,42 @@ const AddBlog = () => {
     }
   }, [categories]);
 
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, false] }],
-      ["bold", "italic", "underline", "blockquote"],
-      [{ list: "bullet" }],
-      [{ align: [] }],
-      [("link", "image")],
-    ],
+  const imageUpload = () => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+    input.onchange = async () => {
+      const form = new FormData();
+      form.append("image", input.files[0]);
+      try {
+        const res = await uploadBlogImage(form).unwrap();
+        const range = ref.current.getEditor().getSelection();
+        ref.current.getEditor().insertEmbed(range.index, "image", res);
+      } catch (error) {
+        console.log(error);
+        toast.error(error?.data?.msg || error.error);
+      }
+    };
   };
+
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          [{ header: [1, 2, false] }],
+          ["bold", "italic", "underline", "blockquote"],
+          [{ list: "bullet" }],
+          [{ align: [] }],
+          [("link", "image")],
+        ],
+        handlers: {
+          image: imageUpload,
+        },
+      },
+    }),
+    []
+  );
 
   const formats = [
     "header",
@@ -84,7 +116,7 @@ const AddBlog = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!value || !blogValues.title || !blogValues.file)
+    if (!value || !blogValues.title || !blogValues.file || !selectedOption)
       return toast.error("Please provide all values");
 
     const form = new FormData();
@@ -147,6 +179,7 @@ const AddBlog = () => {
 
   return (
     <div className="container mx-auto max-w-3xl px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
+      {blogImageLoading && <Loading />}
       <h2 className="text-center mb-5 text-xl font-semibold">
         {newBlog.status ? "Create New Blog" : "Update Blog"}
       </h2>
@@ -164,8 +197,12 @@ const AddBlog = () => {
           />
         </div>
         <div className="flex flex-col lg:flex-row justify-between">
-          <div className="flex bg-teal-600 w-64 mb-2 rounded-lg">
-            <label className="cursor-pointer hover:bg-cyan-600 text-white font-bold py-2 px-4 w-full inline-flex items-center rounded-lg">
+          <div className="flex w-64 mb-2 rounded-lg">
+            <label
+              className={`cursor-pointer ${
+                blogValues.file ? "bg-green-600" : " bg-teal-600"
+              } text-white font-bold py-2 px-4 w-full inline-flex items-center rounded-lg`}
+            >
               <AiOutlineCloudUpload className="text-black h-5 w-5 mr-2" />
               <span className="text-base leading-normal">
                 {blogValues.file ? "Image Uploaded" : "Upload A Cover Picture"}
@@ -195,6 +232,7 @@ const AddBlog = () => {
         </div>
         <ReactQuill
           theme="snow"
+          ref={ref}
           value={value}
           onChange={setValue}
           modules={modules}

@@ -1,6 +1,5 @@
-import { BlogRow, BlogCard, PopularTags } from "../components";
+import { BlogRow, BlogCard, PopularTags, AdSlider } from "../components";
 import { useAllBlogsQuery } from "../redux/blogSlice";
-import { FaArrowRight } from "react-icons/fa";
 import { AiOutlineSearch } from "react-icons/ai";
 
 import hero from "../assets/hero.png";
@@ -77,15 +76,15 @@ const Home = () => {
             <PopularTags className="rounded-lg bg-primary mt-3 mr-2 bg-opacity-10 h-6 md:h-auto px-2 md:px-3 py-0.5 md:py-1.5 text-primary text-sm md:text-base md:font-semibold" />
           </div>
         </div>
-        <div className="hidden lg:block lg:1/2">
+        {/* <div className="hidden lg:block lg:1/2">
           <img
             style={{ paddingLeft: 50, width: 600, height: 380 }}
             src={hero}
             alt="users are reading articles"
           />
-        </div>
+        </div> */}
       </section>
-      <section className="flex flex-col container mx-auto px-5 py-5">
+      {/* <section className="flex flex-col container mx-auto px-5 py-1">
         <h1 className="text-2xl pb-4 font-bold">
           In the Spotlight: Partnerships
         </h1>
@@ -98,13 +97,13 @@ const Home = () => {
             />
           ))}
         </div>
-        {/* <button className="mx-auto flex items-center gap-x-2 font-bold text-primary border-2 border-primary px-5 py-2 rounded-lg">
+        <button className="mx-auto flex items-center gap-x-2 font-bold text-primary border-2 border-primary px-5 py-2 rounded-lg">
           <span>More blogs</span>
           <FaArrowRight className="w-3 h-3" />
-        </button> */}
-      </section>
-
+        </button>
+      </section> */}
       <BlogRow title="Trending Now" blogs={blogs} />
+      <AdSlider />
       <BlogRow title="Cockroach" blogs={blogs} />
       <BlogRow title="Termite" blogs={blogs} />
       <BlogRow title="Mosquito" blogs={blogs} />

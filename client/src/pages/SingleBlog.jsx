@@ -128,7 +128,7 @@ const SingleBlog = () => {
             alt="post"
             className="w-full object-contain h-40 md:h-52 lg:h-72 rounded-lg"
           />
-          <div className="mt-4 flex gap-2">
+          <div className="my-4 flex gap-2">
             {blog?.category.map((item) => (
               <button
                 key={item.value}
@@ -167,9 +167,7 @@ const SingleBlog = () => {
               Share on:
             </h2>
             <SocialShare
-              url={encodeURI(
-                `https://pestbytes.onrender.com/blog/${blog?._id}`
-              )}
+              url={encodeURI(`https://pestbytes.com/blog/${blog?._id}`)}
               title={encodeURIComponent(`Pestbytes - ${blog?.title}`)}
             />
           </div>

@@ -241,7 +241,8 @@ export const getUserProfile = async (req, res) => {
 };
 
 export const updateUserProfile = async (req, res) => {
-  const { name, email, aboutMe, instagram, linkedin, twitter } = req.body;
+  const { name, email, aboutMe, instagram, linkedin, twitter, website } =
+    req.body;
   const { id } = req.params;
   try {
     if (id !== req.user._id.toString()) return;
@@ -260,6 +261,7 @@ export const updateUserProfile = async (req, res) => {
       linkedin: linkedin || null,
       instagram: instagram || null,
       twitter: twitter || null,
+      website: website || null,
     };
 
     user.name = capitalLetter(name);

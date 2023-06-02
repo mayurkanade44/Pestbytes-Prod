@@ -88,10 +88,10 @@ const AddBlog = () => {
       toolbar: {
         container: [
           [{ header: [1, 2, false] }],
-          ["bold", "italic", "underline", "blockquote"],
+          ["bold", "italic", "underline"],
           [{ list: "bullet" }],
           [{ align: [] }],
-          [("link", "image")],
+          ["link", "image", "video"],
         ],
         handlers: {
           image: imageUpload,
@@ -106,12 +106,12 @@ const AddBlog = () => {
     "bold",
     "italic",
     "underline",
-    "blockquote",
     "list",
     "bullet",
     "align",
     "link",
     "image",
+    "video",
   ];
 
   const handleSubmit = async (e) => {
@@ -217,7 +217,7 @@ const AddBlog = () => {
             </label>
           </div>
           {newBlog.status && (
-            <div className="md:w-2/4 mb-2">
+            <div className="md:w-3/5 mb-2">
               <Select
                 closeMenuOnSelect={false}
                 defaultValue={selectedOption}

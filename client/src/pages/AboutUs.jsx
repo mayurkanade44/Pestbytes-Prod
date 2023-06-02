@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 import pestbytes from "../assets/pestbytes.jpg";
 
 const AboutUs = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="2xl:container 2xl:mx-auto lg:px-20 md:py-5 md:px-6 px-4">
       <div className="w-full">
@@ -123,8 +128,8 @@ const AboutUs = () => {
             of a subject.
             <br />
             <br /> Right triangle It’s three tips (investigation)(fact)(new
-            conclusion) Research, he systematic investigation into and study
-            of materials and sources in order to establish facts and reach new
+            conclusion) Research, he systematic investigation into and study of
+            materials and sources in order to establish facts and reach new
             conclusions. <br />
             <br />
             The two dots to either side communicate out common goal to be

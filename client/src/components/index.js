@@ -15,6 +15,7 @@ import Modal from "./Modal";
 import PopularTags from "./PopularTags";
 import AdSlider from "./AdSlider";
 import DeleteModal from "./DeleteModal";
+import ScrollToTop from "./ScrollToTop";
 
 export {
   Navbar,
@@ -34,4 +35,5 @@ export {
   PopularTags,
   AdSlider,
   DeleteModal,
+  ScrollToTop,
 };

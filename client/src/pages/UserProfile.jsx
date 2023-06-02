@@ -66,9 +66,17 @@ const UserProfile = () => {
               </div>
               <div className="hidden md:block">
                 <p>{data?.aboutMe}</p>
-                {/* <span>
-                  <strong>www.bytewebster.com</strong>
-                </span> */}
+                <span>
+                  <strong>
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href={data?.socialLinks?.website}
+                    >
+                      {data?.socialLinks?.website}
+                    </a>
+                  </strong>
+                </span>
                 <div className="w-full flex justify-start mt-2">
                   <a
                     target="_blank"
@@ -123,7 +131,15 @@ const UserProfile = () => {
             <div className="md:hidden block text-sm my-2">
               <p>{data?.aboutMe}</p>
               <span>
-                <strong>www.bytewebster.com</strong>
+                <strong>
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href={data?.socialLinks?.website}
+                  >
+                    {data?.socialLinks?.website}
+                  </a>
+                </strong>
               </span>
               <div className="w-full flex justify-start mt-2">
                 <a

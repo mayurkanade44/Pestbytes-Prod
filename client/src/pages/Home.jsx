@@ -4,7 +4,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 import hero from "../assets/hero.png";
 import { useNavigate } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setSearch } from "../redux/authSlice";
 import { Loading } from "../components/skeletons";
@@ -24,6 +24,10 @@ const Home = () => {
   const dispatch = useDispatch();
   const [tempSearch, setTempSearch] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const debounce = () => {
     let timeoutId;

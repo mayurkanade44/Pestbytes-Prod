@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setNewBlog } from "../redux/authSlice";
 import { toast } from "react-toastify";
 import { useDeleteBlogMutation } from "../redux/blogSlice";
@@ -10,6 +10,7 @@ import { useState } from "react";
 
 const BlogCard = ({ blog, className, profile, refetch }) => {
   const [deleteBlog, { isLoading }] = useDeleteBlogMutation();
+  const { user } = useSelector((store) => store.auth);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,10 +43,10 @@ const BlogCard = ({ blog, className, profile, refetch }) => {
         <img
           src={blog.coverPicture}
           alt="Image"
-          className="w-full h-60 rounded-lg border-b-2"
+          className="w-full h-60 rounded-lg border-b-2 mb-1"
         />
       </Link>
-      {profile && (
+      {profile && user.userId === blog.user._id && (
         <div className=" flex justify-center">
           <button onClick={handleEdit}>
             <FaRegEdit className="text-cyan-600 w-8 h-8 p-1  bg-slate-100 hover:bg-black mr-3" />

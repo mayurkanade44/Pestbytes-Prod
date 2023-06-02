@@ -6,12 +6,17 @@ import { useEffect, useMemo, useState } from "react";
 import { setSearch } from "../redux/authSlice";
 import { SearchBlogSkeleton } from "../components/skeletons";
 import { BreadCrumbs } from "../components";
+import Select from "react-select";
 
 const AllBlogs = () => {
   const { search } = useSelector((store) => store.auth);
   const [page, setPage] = useState(1);
   const [tempSearch, setTempSearch] = useState("");
   const dispatch = useDispatch();
+  const [category, setCategory] = useState([
+    { value: "", label: "All Categories" },
+  ]);
+  const [selectedOption, setSelectedOption] = useState("");
 
   const brd = [
     { name: "Home", link: "/" },
@@ -19,7 +24,7 @@ const AllBlogs = () => {
     { name: search.name },
   ];
 
-  const { data, isLoading } = useSearchBlogsQuery({
+  const { data, isLoading, isFetching } = useSearchBlogsQuery({
     search: search.title,
     category: search.category,
     page: page,
@@ -31,37 +36,30 @@ const AllBlogs = () => {
     window.scrollTo(0, 0);
   }, [page]);
 
-  const searchCategory = ({ category, name }) => {
+  useEffect(() => {
+    if (categories) {
+      categories.map((category) =>
+        setCategory((current) => [
+          ...current,
+          { value: category._id, label: category.category },
+        ])
+      );
+    }
+  }, [categories]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
     dispatch(
       setSearch({
-        title: "",
-        category: category,
-        name: name,
+        title: tempSearch,
+        category: selectedOption.value,
+        name: selectedOption.label,
       })
     );
+
     setPage(1);
   };
-
-  const debounce = () => {
-    let timeoutId;
-    return (e) => {
-      setTempSearch(e.target.value);
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        r;
-        dispatch(
-          setSearch({
-            title: e.target.value,
-            category: "",
-            name: e.target.value,
-          })
-        );
-        setPage(1);
-      }, 1000);
-    };
-  };
-
-  const optimizedDebounce = useMemo(() => debounce(), []);
 
   const pages = Array.from({ length: data?.pages }, (_, index) => index + 1);
 
@@ -70,51 +68,45 @@ const AllBlogs = () => {
       <div className="md:ml-28 mb-2">
         <BreadCrumbs data={brd} />
       </div>
-      <div className="flex justify-center">
-        <div className="flex flex-col w-full md:w-2/3 gap-y-5 mt-2 relative">
-          <AiOutlineSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 text-[#959EAD]" />
-          <input
-            className="placeholder:font-bold font-semibold text-dark-soft placeholder:text-[#959EAD] rounded-lg pl-12 pr-3 w-full py-3 focus:outline-none shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] md:py-3"
-            type="text"
-            placeholder="Search for pest, pest prevention or pest services"
-            value={tempSearch}
-            onChange={optimizedDebounce}
-          />
-        </div>
-      </div>
-      <div className="flex justify-center">
-        <div className="flex flex-wrap mt-5 md:w-2/3 ml-1 md:ml-5 ">
-          <h1 className="font-bold w-2/12 md:w-1/12">Tags:</h1>
-          <div className="w-10/12 md:w-11/12">
-            {categories?.map((category) => (
-              <button
-                key={category._id}
-                className={`mr-2 mb-2 rounded-lg bg-primary ${
-                  search.category === category._id
-                    ? "text-black"
-                    : " text-primary"
-                } bg-opacity-10 h-6 md:h-auto px-1 md:px-2 py-0.5 hover:text-dark-hard text-sm md:text-base md:font-semibold`}
-                onClick={() =>
-                  searchCategory({
-                    category: category._id,
-                    name: category.category,
-                  })
-                }
-              >
-                #{category.category.toLowerCase().split(" ")}
-              </button>
-            ))}
+      <form onSubmit={handleSearch} className="flex justify-center my-4">
+        <div className="flex w-full md:w-2/3">
+          <div className="w-2/4 md:w-1/3">
+            <Select
+              options={category}
+              onChange={setSelectedOption}
+              placeholder="Categories"
+              className="text-sm"
+            />
+          </div>
+          <div className="relative w-full">
+            <input
+              type="search"
+              className="block p-2 w-full z-20 text-sm  rounded-r-lg  border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-500"
+              placeholder="Search for pest, pest prevention or pest services..."
+              onChange={(e) => setTempSearch(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="absolute top-0 right-0 p-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              <AiOutlineSearch className="h-5 w-4 md:w-10 text-black" />
+            </button>
           </div>
         </div>
-      </div>
-      {isLoading ? (
+      </form>
+      {isLoading || isFetching ? (
         <SearchBlogSkeleton />
       ) : (
         <>
           <section className="my-1 text-gray-800 text-center md:text-left">
             <h2 className="text-3xl font-bold mt-3 md:mt-0 mb-5 md:mb-10 text-center">
               {data?.blogs?.length
-                ? `Latest ${search.name} Blogs`
+                ? `Latest ${
+                    search.name === undefined ||
+                    search.name === "All Categories"
+                      ? ""
+                      : search.name
+                  } Blogs`
                 : "No Blog Found"}
             </h2>
             {data?.blogs.map((blog) => (

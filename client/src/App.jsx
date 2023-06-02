@@ -8,7 +8,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import { Footer, Navbar } from "./components";
+import { Footer, Navbar, ScrollToTop } from "./components";
 import {
   Home,
   Login,
@@ -29,6 +29,7 @@ function App() {
         <ToastContainer position="top-center" autoClose={2000} />
         <Navbar />
         <Outlet />
+        <ScrollToTop />
         <Footer />
       </div>
     );

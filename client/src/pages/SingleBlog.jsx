@@ -138,7 +138,7 @@ const SingleBlog = () => {
                 }
                 className="text-primary text-sm font-roboto inline-block md:text-base"
               >
-                #{item.label}
+                #{item.label.replaceAll(" ", "")}
               </button>
             ))}
           </div>

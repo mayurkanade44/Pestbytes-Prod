@@ -27,6 +27,7 @@ const EditProfile = ({ user, close, refetch, id }) => {
       linkedin: user.socialLinks?.linkedin || null,
       instagram: user.socialLinks?.instagram || null,
       twitter: user.socialLinks?.twitter || null,
+      website: user.socialLinks?.website || null,
     },
     mode: "onChange",
   });
@@ -44,7 +45,8 @@ const EditProfile = ({ user, close, refetch, id }) => {
       data.aboutMe === user.aboutMe &&
       data.linkedin === user.socialLinks.linkedin &&
       data.instagram === user.socialLinks.instagram &&
-      data.twitter === user.socialLinks.twitter
+      data.twitter === user.socialLinks.twitter &&
+      data.website === user.socialLinks.website
     ) {
       close();
       return;
@@ -184,12 +186,27 @@ const EditProfile = ({ user, close, refetch, id }) => {
             <textarea
               type="text"
               id="aboutMe"
-              rows='3'
+              rows="3"
               {...register("aboutMe")}
               placeholder="Describe yourself in short"
               className={`placeholder:text-[#959ead] text-dark-hard mt-1 rounded-lg px-3 py-2 font-semibold block outline-none border ${
                 errors.name ? "border-red-500" : "border-[#c3cad9]"
               }`}
+            />
+          </div>
+          <div className="flex flex-col mb-4 w-full">
+            <label
+              htmlFor="website"
+              className="text-[#5a7184] font-semibold block pl-1"
+            >
+              Website
+            </label>
+            <input
+              type="text"
+              id="website"
+              {...register("website")}
+              placeholder="Please provide your website/portfolio link"
+              className="placeholder:text-[#959ead] text-dark-hard mt-1 rounded-lg px-3 py-2 font-semibold block outline-none border border-[#c3cad9]"
             />
           </div>
           <div className="flex flex-col mb-4 w-full">
@@ -237,7 +254,6 @@ const EditProfile = ({ user, close, refetch, id }) => {
               className="placeholder:text-[#959ead] text-dark-hard mt-1 rounded-lg px-3 py-2 font-semibold block outline-none border border-[#c3cad9]"
             />
           </div>
-
           <button
             type="submit"
             disabled={!isValid || isLoading}

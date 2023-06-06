@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import temp from "../assets/ad.jpg";
 import ad from "../assets/eppl.jpeg";
-import { Link } from "react-router-dom";
-import AdModal from "./modals/AdModal";
 
 const featuredProducts = [
   { image: ad, link: "https://epcorn.com/" },
@@ -84,7 +82,6 @@ const AdSlider = () => {
           )}
         </div>
       </div>
-      <AdModal onClose={onClose} open={open} />
     </>
   );
 };

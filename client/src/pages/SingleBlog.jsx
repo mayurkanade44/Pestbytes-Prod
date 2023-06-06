@@ -6,7 +6,11 @@ import {
 } from "../components";
 import post from "../assets/post.jpg";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetSingleBlogQuery, useLikeBlogMutation } from "../redux/blogSlice";
+import {
+  useAllBlogsQuery,
+  useGetSingleBlogQuery,
+  useLikeBlogMutation,
+} from "../redux/blogSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdCalendarMonth } from "react-icons/md";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
@@ -19,6 +23,7 @@ import ad from "../assets/verticalAd.jpg";
 const SingleBlog = () => {
   const { id } = useParams();
   const { data: blog, refetch, isLoading, error } = useGetSingleBlogQuery(id);
+  const { data: latest } = useAllBlogsQuery();
   const [likeBlog] = useLikeBlogMutation();
   const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
@@ -163,7 +168,7 @@ const SingleBlog = () => {
         <div>
           <SuggestedBlogs
             header="Latest Article"
-            posts={postsData}
+            posts={latest?.blogs}
             className="mt-8 lg:mt-0 lg:max-w-xs"
           />
           <img src={ad} className="w-80 my-5 h-80" />

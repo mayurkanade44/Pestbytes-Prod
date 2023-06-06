@@ -35,8 +35,8 @@ const BlogRow = ({ title, blogs }) => {
             className="flex items-center space-x-0.5 md:mx-3 scrollbar-hide overflow-x-scroll md:space-x-2.5 md:p-2"
             ref={rowRef}
           >
-            {blogs.map((blog) => (
-              <BlogRowCard key={blog.id} blog={blog} />
+            {blogs?.map((blog) => (
+              <BlogRowCard key={blog._id} blog={blog} />
             ))}
           </div>
 

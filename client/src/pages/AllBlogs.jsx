@@ -146,14 +146,9 @@ const AllBlogs = () => {
                       </span>
                     </small>
                   </p>
-                  <span
-                    className=" text-gray-500"
-                    dangerouslySetInnerHTML={{
-                      __html: blog?.body.substring(0, 100),
-                    }}
-                  />
+                 
                   <Link to={`/blog/${blog._id}`} className="text-primary">
-                    ...Read More
+                    Read More
                   </Link>
                 </div>
               </div>

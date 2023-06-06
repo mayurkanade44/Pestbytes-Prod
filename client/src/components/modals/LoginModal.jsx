@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,7 +9,6 @@ import {
 import { setCredentials, toggleModal } from "../../redux/authSlice";
 import { toast } from "react-toastify";
 import Modal from "./Modal";
-import ForgotPassword from "../ForgotPassword";
 
 const LoginModal = () => {
   const dispatch = useDispatch();

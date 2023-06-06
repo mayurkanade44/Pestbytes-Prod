@@ -112,11 +112,57 @@ export const getAllBlogs = async (req, res) => {
     const blogs = await Blog.find()
       .populate({
         path: "user",
-        select: "name avatar",
+        select: "name avatar createdAt",
       })
-      .sort("-createdAt");
+      .sort("-createdAt")
+      .limit(8);
 
-    res.json(blogs);
+    const cockroach = await Blog.find({
+      category: {
+        $elemMatch: {
+          value: new mongoose.Types.ObjectId("646b40162ce0bb21a57968fa"),
+        },
+      },
+    })
+      .populate({
+        path: "user",
+        select: "name avatar createdAt",
+      })
+      .sort("-createdAt")
+      .select("-body -comments -likes")
+      .limit(8);
+
+    const termite = await Blog.find({
+      category: {
+        $elemMatch: {
+          value: new mongoose.Types.ObjectId("646c95240053b184c58edec0"),
+        },
+      },
+    })
+      .populate({
+        path: "user",
+        select: "name avatar createdAt",
+      })
+      .sort("-createdAt")
+      .select("-body -comments -likes")
+      .limit(8);
+
+    const mosquito = await Blog.find({
+      category: {
+        $elemMatch: {
+          value: new mongoose.Types.ObjectId("646c95090053b184c58edebe"),
+        },
+      },
+    })
+      .populate({
+        path: "user",
+        select: "name avatar createdAt",
+      })
+      .sort("-createdAt")
+      .select("-body -comments -likes")
+      .limit(8);
+
+    res.json({ blogs, cockroach, termite, mosquito });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: "Server error, try again later." });

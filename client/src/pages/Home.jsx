@@ -105,11 +105,17 @@ const Home = () => {
           <FaArrowRight className="w-3 h-3" />
         </button>
       </section> */}
-      <BlogRow title="Trending Now" blogs={blogs} />
+      <BlogRow title="Trending Now" blogs={data?.blogs} />
       <AdSlider />
-      <BlogRow title="Cockroach" blogs={blogs} />
-      <BlogRow title="Termite" blogs={blogs} />
-      <BlogRow title="Mosquito" blogs={blogs} />
+      {data?.cockroach?.length > 0 && (
+        <BlogRow title="Cockroach" blogs={data?.cockroach} />
+      )}
+      {data?.termite?.length > 0 && (
+        <BlogRow title="Termite" blogs={data?.termite} />
+      )}
+      {data?.mosquito?.length > 0 && (
+        <BlogRow title="Mosquito" blogs={data?.mosquito} />
+      )}
     </div>
   );
 };

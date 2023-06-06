@@ -7,15 +7,14 @@ import Comments from "./Comments";
 import SocialShare from "./SocialShare";
 import BlogRow from "./BlogRow";
 import EditProfile from "./EditProfile";
-import PrivateRoute from "./PrivateRoute";
 import CropEasy from "./CropEasy";
 import ForgotPassword from "./ForgotPassword";
 import BlogCard from "./BlogCard";
-import Modal from "./Modal";
 import PopularTags from "./PopularTags";
 import AdSlider from "./AdSlider";
 import DeleteModal from "./DeleteModal";
 import ScrollToTop from "./ScrollToTop";
+import ProtectedRoute from "./ProtectedRoute";
 
 export {
   Navbar,
@@ -27,13 +26,12 @@ export {
   SocialShare,
   BlogRow,
   EditProfile,
-  PrivateRoute,
   CropEasy,
   ForgotPassword,
   BlogCard,
-  Modal,
   PopularTags,
   AdSlider,
   DeleteModal,
   ScrollToTop,
+  ProtectedRoute,
 };

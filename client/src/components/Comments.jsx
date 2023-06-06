@@ -7,10 +7,12 @@ import {
 } from "../redux/blogSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toggleModal } from "../redux/authSlice";
 
 const Comments = ({ comments, blogUser, userId, blogId, refetch }) => {
   const [comment, setComment] = useState("");
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [addComment, { isLoading: commentLoading }] = useAddCommentMutation();
   const [deleteComment, { isLoading: deleteLoading }] =
     useDeleteCommentMutation();
@@ -38,9 +40,7 @@ const Comments = ({ comments, blogUser, userId, blogId, refetch }) => {
 
     if (!userId) {
       toast.error("Please login to comment");
-      setTimeout(() => {
-        navigate("/login");
-      }, 1000);
+      dispatch(toggleModal({ register: false, login: true }));
       return;
     }
 

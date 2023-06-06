@@ -12,6 +12,11 @@ const initialState = {
   newBlog: {
     status: true,
     blogId: "",
+    showCategory: true,
+  },
+  isOpen: {
+    register: false,
+    login: false,
   },
 };
 
@@ -33,8 +38,12 @@ const authSlice = createSlice({
     setNewBlog: (state, { payload }) => {
       state.newBlog = payload;
     },
+    toggleModal: (state, { payload }) => {
+      state.isOpen = payload;
+    },
   },
 });
 
-export const { setCredentials, logout, setSearch, setNewBlog } = authSlice.actions;
+export const { setCredentials, logout, setSearch, setNewBlog, toggleModal } =
+  authSlice.actions;
 export default authSlice.reducer;

@@ -5,11 +5,12 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useLogoutMutation } from "../redux/userSlice";
-import { logout, setNewBlog } from "../redux/authSlice";
+import { logout, setNewBlog, toggleModal } from "../redux/authSlice";
 import { toast } from "react-toastify";
 
 const navItemsInfo = [
   { name: "Home", type: "link", href: "/" },
+  { name: "Add Blog", type: "link", href: "/add-blog" },
   { name: "About Us", type: "link", href: "/about-pestbytes" },
   { name: "Contact Us", type: "link", href: "/" },
 ];
@@ -58,7 +59,7 @@ const Navbar = () => {
   };
 
   const addBlog = () => {
-    dispatch(setNewBlog({ status: true, blogId: "" }));
+    dispatch(setNewBlog({ status: true, blogId: "", showCategory: true }));
     navVisibilityHandler();
     navigate("/add-blog");
   };
@@ -67,7 +68,7 @@ const Navbar = () => {
       <header className="container mx-auto px-5 flex justify-between py-4 items-center">
         <div>
           <Link to="/">
-            <img src={logo} className="w-12" alt="logo" />
+            <img src={logo} className="w-12 logo" alt="logo" />
           </Link>
         </div>
         <div className="lg:hidden z-50">
@@ -86,14 +87,25 @@ const Navbar = () => {
           } transition-all duration-300 mt-[56px] lg:mt-0 bg-dark-hard lg:bg-transparent z-[49] flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0 lg:static gap-x-2 items-center`}
         >
           <ul className="text-white items-center gap-y-7 lg:text-dark-soft flex flex-col lg:flex-row gap-x-2 font-semibold">
-            {navItemsInfo.map((item) => (
-              <NavItems
-                key={item.name}
-                name={item.name}
-                href={item.href}
-                setNavIsVisible={navVisibilityHandler}
-              />
-            ))}
+            {navItemsInfo.map((item) =>
+              item.name === "Add Blog" ? (
+                user && (
+                  <NavItems
+                    key={item.name}
+                    name={item.name}
+                    href={item.href}
+                    setNavIsVisible={navVisibilityHandler}
+                  />
+                )
+              ) : (
+                <NavItems
+                  key={item.name}
+                  name={item.name}
+                  href={item.href}
+                  setNavIsVisible={navVisibilityHandler}
+                />
+              )
+            )}
           </ul>
           {user ? (
             <div className="text-white items-center gap-y-5 lg:text-dark-soft flex flex-col lg:flex-row gap-x-2 font-semibold">
@@ -146,13 +158,14 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <Link
-              to="/login"
-              onClick={navVisibilityHandler}
+            <button
+              onClick={() =>
+                dispatch(toggleModal({ register: false, login: true }))
+              }
               className="mt-8 lg:mt-0 border-2 border-blue-500 px-4 py-1 rounded-full text-blue-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300"
             >
               Log In
-            </Link>
+            </button>
           )}
         </div>
       </header>

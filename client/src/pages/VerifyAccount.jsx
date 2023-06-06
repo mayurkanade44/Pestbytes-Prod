@@ -2,11 +2,14 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useVerifyEmailMutation } from "../redux/userSlice";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { toggleModal } from "../redux/authSlice";
 
 const VerifyAccount = () => {
   const [searchParams] = useSearchParams();
   const [verifyEmail, { isLoading, error }] = useVerifyEmailMutation();
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const verify = async () => {
     setLoading(true);
@@ -48,12 +51,14 @@ const VerifyAccount = () => {
               Your Account Successfully Verified.
             </h1>
             <div className="flex justify-center">
-              <Link
-                to="/login"
+              <button
+                onClick={() =>
+                  dispatch(toggleModal({ register: false, login: true }))
+                }
                 className="bg-primary w-20  text-white font-bold mb-2 text-lg py-1 px-4 rounded-lg"
               >
                 Login
-              </Link>
+              </button>
             </div>
           </>
         )}

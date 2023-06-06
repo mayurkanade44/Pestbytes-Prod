@@ -11,11 +11,11 @@ import {
 import { toast } from "react-toastify";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import Select from "react-select";
-import { Modal } from "../components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setNewBlog } from "../redux/authSlice";
 import { Loading } from "../components/skeletons";
+import BlogModal from "../components/modals/BlogModal";
 
 const AddBlog = () => {
   const [value, setValue] = useState("");
@@ -50,8 +50,16 @@ const AddBlog = () => {
       });
       setValue(blog.body);
       setSelectedOption(blog.category);
+    } else {
+      setBlogValues({
+        title: "",
+        file: "",
+        openPreview: false,
+      });
+      setValue("");
+      setSelectedOption([]);
     }
-  }, [blog]);
+  }, [blog, newBlog.status]);
 
   useEffect(() => {
     if (categories) {
@@ -216,7 +224,7 @@ const AddBlog = () => {
               />
             </label>
           </div>
-          {newBlog.status && (
+          {newBlog.showCategory ? (
             <div className="md:w-3/5 mb-2">
               <Select
                 closeMenuOnSelect={false}
@@ -228,6 +236,22 @@ const AddBlog = () => {
                 required
               />
             </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() =>
+                dispatch(
+                  setNewBlog({
+                    status: false,
+                    blogId: newBlog.blogId,
+                    showCategory: true,
+                  })
+                )
+              }
+              className="bg-black text-white h-8 w-40 rounded-lg hover:bg-slate-700"
+            >
+              Modify Categories
+            </button>
           )}
         </div>
         <ReactQuill
@@ -251,18 +275,16 @@ const AddBlog = () => {
         </div>
         <div className="flex justify-center"></div>
       </form>
-      {blogValues.openPreview && (
-        <Modal
-          title="Blog Preview"
-          value={value}
-          openPreview={blogValues.openPreview}
-          onClose={onClose}
-          onSubmit={handleSubmit}
-          blogValues={blogValues}
-          isLoading={updateBlogLoading || postBlogLoading}
-          user={user}
-        />
-      )}
+      <BlogModal
+        disabled={updateBlogLoading || postBlogLoading}
+        onSubmit={handleSubmit}
+        blogValues={blogValues}
+        isOpen={blogValues.openPreview}
+        onClose={onClose}
+        openPreview={blogValues.openPreview}
+        user={user}
+        value={value}
+      />
     </div>
   );
 };

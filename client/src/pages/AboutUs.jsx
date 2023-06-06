@@ -15,17 +15,18 @@ const AboutUs = () => {
         <p className="font-normal text-base leading-6 text-gray-600 mt-6">
           It started as an talkathon idea between 2 individuals to create a
           space neutral but must be cohesive and collaborative in every sense of
-          its expression. Where one would put words to text and the other would
-          ideate. Pestbytes was registered in 2020, but stayed in incubation for
-          3 years, bouncing around, seeking collaboration through the years that
-          passed and then in 2023 the pivot was to create a platform to
-          influence a new pattern of collaborative learning not just keeping it
-          focused on a fixed set of writers but opening it up to all communities
-          and spectrum of contributors. Pestbytes in 2023 collaborated putting
-          together mind and technology to create a platform open to becoming a
-          central space where knowledge sharing and innovation announcement is
-          done with pride, encouraging a whole new generation of entrepreneurs
-          to share, learn, comment, and build knowledge.
+          its expression. <br /> Where one would put words to text and the other
+          would ideate. Pestbytes was registered in 2020, but stayed in
+          incubation for 3 years, bouncing around, seeking collaboration through
+          the years that passed and then in 2023 the pivot was to create a
+          platform to influence a new pattern of collaborative learning not just
+          keeping it focused on a fixed set of writers but opening it up to all
+          communities and spectrum of contributors. <br /> <b> "Pestbytes"</b>{" "}
+          in 2023 collaborated putting together mind and technology to create a
+          platform open to becoming a central space where knowledge sharing and
+          innovation announcement is done with pride, encouraging a whole new
+          generation of entrepreneurs to share, learn, comment, and build
+          knowledge.
         </p>
       </div>
       <div className="mt-5">
@@ -49,13 +50,13 @@ const AboutUs = () => {
       <div className="lg:mt-16 sm:mt-12 mt-16 flex lg:flex-row justify-between flex-col lg:gap-8 gap-12">
         <div className="w-full xl:w-5/12 lg:w-6/12">
           <h2 className="font-bold lg:text-4xl text-3xl lg:leading-9 leading-7 text-gray-800">
-            Our Story
+            My Story
           </h2>
-          <p className="font-normal text-base leading-6 text-gray-600 mt-4">
+          <p className="font-normal text-base leading-6 text-gray-600 mt-4 mr-2">
             Personally I am a long-time champion of interdisciplinary research,
             proudly a 2nd generation entrepreneur, with over 2 decades of
             hands-on experience adding value to the different products used
-            whilst delivering pest management services, I saw that many
+            whilst delivering pest management services. <br /> I saw that many
             individuals and manufacturers share a lot of valuable data which can
             help the industry on different portals, I personally wanted to
             create an integrated frame where knowledge and research is shared on
@@ -121,25 +122,26 @@ const AboutUs = () => {
             src={pestbytes}
             alt="people discussing on board"
           />
-          <p className="font-normal text-base leading-6 text-gray-600 mt-4">
-            Left triangle - It’s there tips (fact)(information)(skill)
-            Knowledge: facts, information, and skills acquired through
+          <p className="font-normal text-base leading-6 text-gray-600 mt-4 ml-1">
+            <b> Left triangle </b> represents the triangle of Knowledge. It’s
+            equilateral sides represent, (fact), (information) & (skill).
+            Knowledge is facts, information, and skills acquired through
             experience or education; the theoretical or practical understanding
             of a subject.
             <br />
-            <br /> Right triangle It’s three tips (investigation)(fact)(new
-            conclusion) Research, he systematic investigation into and study of
-            materials and sources in order to establish facts and reach new
+            <br /> <b> Right triangle </b> represents the triangle of Research.
+            It’s equilateral sides represent (investigation), fact)& (new
+            conclusion). Research is the systematic investigation into and study
+            of materials and sources in order to establish facts and reach new
             conclusions. <br />
+            <br /> <b> The two dots </b> to either side communicate out common
+            goal to be available via new emerging platform and technologies.{" "}
             <br />
-            The two dots to either side communicate out common goal to be
-            available via new emerging platform and technologies.
-            <br />
-            <br /> The intersection of the two triangles of knowledge and
-            research opens up a third new space, a space of influenced decision
-            taking, opening up a new spectrum of works which will be undertaken
-            where research will influence knowledge, resulting in more
-            responsible actions leading to sustainable and environmentally
+            <br /> <b> The intersection </b> of the two triangles of knowledge
+            and research opens up a third new space, a space of influenced
+            decision taking, opening up a new spectrum of works which will be
+            undertaken where research will influence knowledge, resulting in
+            more responsible actions leading to sustainable and environmentally
             stable actions.
           </p>
         </div>

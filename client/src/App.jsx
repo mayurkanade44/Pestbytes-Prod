@@ -8,11 +8,9 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import { Footer, Navbar, ScrollToTop } from "./components";
+import { Footer, Navbar, ScrollToTop, ProtectedRoute } from "./components";
 import {
   Home,
-  Login,
-  Register,
   ResetPassword,
   SingleBlog,
   VerifyAccount,
@@ -21,6 +19,8 @@ import {
   AllBlogs,
   AboutUs,
 } from "./pages";
+import RegisterModal from "./components/modals/RegisterModal";
+import LoginModal from "./components/modals/LoginModal";
 
 function App() {
   const Layout = () => {
@@ -28,6 +28,8 @@ function App() {
       <div className="App font-opensans">
         <ToastContainer position="top-center" autoClose={2000} />
         <Navbar />
+        <RegisterModal />
+        <LoginModal />
         <Outlet />
         <ScrollToTop />
         <Footer />
@@ -39,14 +41,26 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route index={true} path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/about-pestbytes" element={<AboutUs />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/verify-account" element={<VerifyAccount />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/add-blog" element={<AddBlog />} />
+        <Route
+          path="/add-blog"
+          element={
+            <ProtectedRoute>
+              <AddBlog />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/all-blogs" element={<AllBlogs />} />
-        <Route path="/profile/:id" element={<UserProfile />} />
+        <Route
+          path="/profile/:id"
+          element={
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/blog/:id" element={<SingleBlog />} />
       </Route>
     )

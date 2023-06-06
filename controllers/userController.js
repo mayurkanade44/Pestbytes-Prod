@@ -23,7 +23,7 @@ export const registerUser = async (req, res) => {
       newName,
       email,
       link,
-      template: "d-7949d5cffefe46a7b6a0eab95b71076e",
+      template: "d-458b69d16c73496f92254407bc4c50c7",
     });
     if (!mail)
       return res.status(500).json({ msg: "Server error, try again later." });
@@ -50,7 +50,7 @@ const sendEmail = async ({ name, email, link, template }) => {
 
     const msg = {
       to: email,
-      from: { email: "noreply.epcorn@gmail.com", name: "PestBytes" },
+      from: { email: "noreply.pestbytes@gmail.com", name: "PestBytes" },
       dynamic_template_data: {
         name: name,
         link: link,
@@ -147,7 +147,7 @@ export const forgotPassword = async (req, res) => {
         name: user.name,
         email,
         link,
-        template: "d-5d44d02a46dd4428b950e580d2bf3770",
+        template: "d-7bb0ef4f3cc34c8998b4e3cc7d718fd4",
       });
 
       if (!mail)

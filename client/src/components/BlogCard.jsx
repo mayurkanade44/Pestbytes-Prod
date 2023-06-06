@@ -19,6 +19,7 @@ const BlogCard = ({ blog, className, profile, refetch }) => {
       setNewBlog({
         status: false,
         blogId: blog._id,
+        showCategory: false,
       })
     );
     navigate("/add-blog");

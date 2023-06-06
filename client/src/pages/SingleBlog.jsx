@@ -171,7 +171,7 @@ const SingleBlog = () => {
             posts={latest?.blogs}
             className="mt-8 lg:mt-0 lg:max-w-xs"
           />
-          <img src={ad} className="w-80 my-5 h-80" />
+          <img src={ad} className="w-full lg:w-80 h-60 my-5" />
           <div className="mt-7">
             <h2 className="font-roboto font-medium text-dark-hard mb-4 md:text-xl">
               Share on:

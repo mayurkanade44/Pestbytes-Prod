@@ -35,8 +35,8 @@ const VerifyAccount = () => {
   }
 
   return (
-    <section className="container mx-auto px-5 py-10">
-      <div className="w-full mx-auto">
+    <section className="container mx-auto px-5 py-10 md:py-28">
+      <div className="w-full mx-auto max-w-xl">
         {error ? (
           <h1 className="font-roboto text-2xl font-bold text-center text-dark-hard my-9">
             <span className="text-red-700"> There was an error, </span> Please

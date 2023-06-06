@@ -8,16 +8,6 @@ import { useDispatch } from "react-redux";
 import { setSearch } from "../redux/authSlice";
 import { Loading } from "../components/skeletons";
 
-const blogs = [
-  { id: 1 },
-  { id: 2 },
-  { id: 3 },
-  { id: 4 },
-  { id: 5 },
-  { id: 6 },
-  { id: 7 },
-];
-
 const Home = () => {
   const { data, isLoading, refetch } = useAllBlogsQuery();
   const dispatch = useDispatch();

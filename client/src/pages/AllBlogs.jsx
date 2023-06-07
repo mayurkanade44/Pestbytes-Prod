@@ -146,7 +146,6 @@ const AllBlogs = () => {
                       </span>
                     </small>
                   </p>
-                 
                   <Link to={`/blog/${blog._id}`} className="text-primary">
                     Read More
                   </Link>

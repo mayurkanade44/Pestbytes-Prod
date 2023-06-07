@@ -4,7 +4,6 @@ import {
   SocialShare,
   SuggestedBlogs,
 } from "../components";
-import post from "../assets/post.jpg";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useAllBlogsQuery,
@@ -13,10 +12,10 @@ import {
 } from "../redux/blogSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdCalendarMonth } from "react-icons/md";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { SingleBlogSkeleton } from "../components/skeletons";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setSearch, toggleModal } from "../redux/authSlice";
 import ad from "../assets/verticalAd.jpg";
 
@@ -25,6 +24,7 @@ const SingleBlog = () => {
   const { data: blog, refetch, isLoading, error } = useGetSingleBlogQuery(id);
   const { data: latest } = useAllBlogsQuery();
   const [likeBlog] = useLikeBlogMutation();
+  const [share, setShare] = useState(false);
   const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -99,7 +99,11 @@ const SingleBlog = () => {
                   </div>
                 </div>
               </div>
-              <span className="font-bold text-dark-light italic text-sm md:text-base">
+              <span className="font-bold flex text-dark-light italic text-sm md:text-base">
+                <AiOutlineShareAlt
+                  className="w-7 h-7 mt-0.5 mr-4 text-black hover:cursor-pointer"
+                  onClick={() => setShare(!share)}
+                />
                 <button type="button" onClick={handleLike}>
                   {user && blog?.likes.find((like) => like === user.userId) ? (
                     <AiFillHeart className="text-[#ee4040] w-6 h-6 mr-2 mb-1 inline" />
@@ -110,7 +114,14 @@ const SingleBlog = () => {
                 </button>
               </span>
             </div>
+            {share && (
+              <SocialShare
+                url={encodeURI(`https://pestbytes.com/blog/${blog?._id}`)}
+                title={encodeURIComponent(`Pestbytes - ${blog?.title}`)}
+              />
+            )}
           </div>
+
           <img
             src={blog?.coverPicture}
             alt="post"
@@ -151,7 +162,7 @@ const SingleBlog = () => {
             className="mt-8 lg:mt-0 lg:max-w-xs"
           />
           <img src={ad} className="w-full lg:w-80 h-60 my-5" />
-          <div className="mt-7">
+          {/* <div className="mt-7">
             <h2 className="font-roboto font-medium text-dark-hard mb-4 md:text-xl">
               Share on:
             </h2>
@@ -159,7 +170,7 @@ const SingleBlog = () => {
               url={encodeURI(`https://pestbytes.com/blog/${blog?._id}`)}
               title={encodeURIComponent(`Pestbytes - ${blog?.title}`)}
             />
-          </div>
+          </div> */}
         </div>
       </section>
     </div>

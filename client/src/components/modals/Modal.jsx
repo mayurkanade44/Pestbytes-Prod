@@ -31,12 +31,8 @@ const Modal = ({
 
   return (
     <>
-      <div
-        className={`justify-center ${itemCenter} flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70`}
-      >
-        <div
-          className={`relative w-full mt-20 md:mt-2 md:w-4/6 ${width ? "lg:w-2/6" : "lg:w-3/6"} my-6 mx-auto h-full lg:h-auto md:h-auto`}
-        >
+      <div className={itemCenter}>
+        <div className={width}>
           <div
             className={`translate duration-300 h-full ${
               showModal ? "translate-y-0" : "translate-y-full"

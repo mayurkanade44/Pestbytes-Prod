@@ -33,7 +33,7 @@ const RegisterModal = () => {
     try {
       const res = await registerUser(data).unwrap();
       toast.success(res.msg);
-      reset()
+      reset();
     } catch (error) {
       console.log(error);
       toast.error(error?.data?.msg || error.error);
@@ -202,14 +202,14 @@ const RegisterModal = () => {
     <div>
       <Modal
         disabled={isLoading || !isValid}
-        width={false}
         title="Register"
         actionLabel="Register"
         onSubmit={handleSubmit(submitHandler)}
         body={body}
         isOpen={isOpen.register}
         onClose={() => dispatch(toggleModal({ register: false, login: false }))}
-        itemCenter="items-center"
+        width="relative w-full mt-20 md:mt-2 md:w-4/6 lg:w-3/6 my-6 mx-auto h-full lg:h-auto md:h-auto"
+        itemCenter="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70"
       />
     </div>
   );

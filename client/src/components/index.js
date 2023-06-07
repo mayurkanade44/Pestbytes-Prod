@@ -12,7 +12,6 @@ import ForgotPassword from "./ForgotPassword";
 import BlogCard from "./BlogCard";
 import PopularTags from "./PopularTags";
 import AdSlider from "./AdSlider";
-import DeleteModal from "./DeleteModal";
 import ScrollToTop from "./ScrollToTop";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -31,7 +30,6 @@ export {
   BlogCard,
   PopularTags,
   AdSlider,
-  DeleteModal,
   ScrollToTop,
   ProtectedRoute,
 };

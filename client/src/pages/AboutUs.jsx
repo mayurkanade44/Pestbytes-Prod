@@ -1,15 +1,23 @@
 import { useEffect } from "react";
 import pestbytes from "../assets/pestbytes.jpg";
+import { BreadCrumbs } from "../components";
 
 const AboutUs = () => {
+
+  const brd = [
+    { name: "Home", link: "/" },
+    { name: "About Pestbytes", link: `/about-pestbytes` },
+  ];
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="2xl:container 2xl:mx-auto lg:px-20 md:py-5 md:px-6 px-4">
+    <div className="2xl:container 2xl:mx-auto lg:px-20 mt-3 md:py-3 md:px-6 px-4">
+      <BreadCrumbs data={brd} />
       <div className="w-full">
-        <h2 className="w-full font-bold text-center text-gray-800 lg:text-4xl text-3xl lg:leading-10 leading-9 mt-2">
+        <h2 className="w-full font-bold text-center text-gray-800 lg:text-4xl text-3xl lg:leading-10 leading-9 mt-3">
           About Pestbytes
         </h2>
         <p className="font-normal text-base leading-6 text-gray-600 mt-6">

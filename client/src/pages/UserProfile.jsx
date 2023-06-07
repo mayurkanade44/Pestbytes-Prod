@@ -3,13 +3,8 @@ import { useSelector } from "react-redux";
 import { useGetUserProfileQuery } from "../redux/userSlice";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { EditProfile } from "../components";
-import {
-  FaFacebookSquare,
-  FaTwitterSquare,
-  FaLinkedin,
-  FaInstagram,
-} from "react-icons/fa";
+import { BreadCrumbs, EditProfile } from "../components";
+import { FaTwitterSquare, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { UserProfileSkeleton } from "../components/skeletons";
 
 const UserProfile = () => {
@@ -18,6 +13,12 @@ const UserProfile = () => {
   const { data, refetch, isLoading, error } = useGetUserProfileQuery(id);
   const [open, setOpen] = useState(false);
   const [blogs, setBlogs] = useState([]);
+
+  const brd = [
+    { name: "Home", link: "/" },
+    { name: "Profile", link: "" },
+    { name: user.name, link: `` },
+  ];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,7 +38,10 @@ const UserProfile = () => {
       {open ? (
         <EditProfile user={data} id={id} close={goBack} refetch={refetch} />
       ) : (
-        <div className="lg:w-8/12 lg:mx-auto mb-8">
+        <div className="lg:w-8/12 lg:mx-auto my-5">
+          <div className="ml-5">
+            <BreadCrumbs data={brd} />
+          </div>
           <header className="flex flex-wrap p-4 md:pt-8 pb-2">
             <div className="md:ml-16 mt-1">
               <img

@@ -190,14 +190,14 @@ const LoginModal = () => {
     <div>
       <Modal
         disabled={isLoading || forgotLoading || !isValid}
-        width='w-2/6'
         title={openForgot ? "Forgot Password" : "Login"}
         actionLabel={openForgot ? "Get Reset Password Link" : "Login"}
         onSubmit={handleSubmit(submitHandler)}
         body={openForgot ? forgotBody : loginBody}
         isOpen={isOpen.login}
         onClose={() => dispatch(toggleModal({ register: false, login: false }))}
-        itemCenter="items-center"
+        width="relative w-full mt-20 md:mt-2 md:w-4/6 lg:w-2/6 my-6 mx-auto h-full lg:h-auto md:h-auto"
+        itemCenter="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70"
       />
     </div>
   );

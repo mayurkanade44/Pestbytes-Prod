@@ -3,8 +3,8 @@ import generateToken from "../utils/generateToken.js";
 import fs from "fs";
 import crypto from "crypto";
 import { v2 as cloudinary } from "cloudinary";
-import sgMail from "@sendgrid/mail";
-import { capitalLetter } from "../utils/helpers.js";
+
+import { capitalLetter, sendEmail } from "../utils/helpers.js";
 
 export const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -20,7 +20,7 @@ export const registerUser = async (req, res) => {
     const newName = capitalLetter(name);
     const link = `https://pestbytes.com/verify-account?token=${verificationToken}&email=${email}`;
     const mail = await sendEmail({
-      newName,
+      name: newName,
       email,
       link,
       template: "d-458b69d16c73496f92254407bc4c50c7",
@@ -41,27 +41,6 @@ export const registerUser = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: "Server error, try again later." });
-  }
-};
-
-const sendEmail = async ({ name, email, link, template }) => {
-  try {
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-    const msg = {
-      to: email,
-      from: { email: "noreply.pestbytes@gmail.com", name: "PestBytes" },
-      dynamic_template_data: {
-        name: name,
-        link: link,
-      },
-      template_id: template,
-    };
-
-    return sgMail.send(msg);
-  } catch (error) {
-    console.log(error);
-    return false;
   }
 };
 

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setNewBlog } from "../redux/authSlice";
 import { toast } from "react-toastify";
 import { useDeleteBlogMutation } from "../redux/blogSlice";
-import DeleteModal from "./DeleteModal";
+import DeleteModal from "../components/modals/DeleteModal";
 import { useState } from "react";
 
 const BlogCard = ({ blog, className, profile, refetch }) => {

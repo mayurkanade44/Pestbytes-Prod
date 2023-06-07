@@ -33,27 +33,6 @@ const SingleBlog = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const postsData = [
-    {
-      _id: "1",
-      image: post,
-      title: "Help children get better education",
-      createdAt: "2023-01-28T15:35:53.607+0000",
-    },
-    {
-      _id: "2",
-      image: post,
-      title: "Help children get better education",
-      createdAt: "2023-02-28T15:35:53.607+0000",
-    },
-    {
-      _id: "3",
-      image: post,
-      title: "Help children get better education",
-      createdAt: "2023-03-28T15:35:53.607+0000",
-    },
-  ];
-
   const brd = [
     { name: "Home", link: "/" },
     { name: "Blogs", link: `/all-blogs` },

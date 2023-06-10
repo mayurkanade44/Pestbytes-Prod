@@ -21,11 +21,14 @@ const UserProfile = () => {
   ];
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     if (data) {
       setBlogs(data.blogs);
     }
   }, [data]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const goBack = () => {
     setOpen(!open);

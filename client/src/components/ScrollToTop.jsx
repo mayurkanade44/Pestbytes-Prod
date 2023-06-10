@@ -24,7 +24,7 @@ const ScrollToTop = () => {
   window.addEventListener("scroll", toggleVisible);
 
   return (
-    <div className="fixed right-5 bottom-5 md:bottom-10">
+    <div className="fixed right-5 bottom-16 lg:bottom-10">
       <button className="relative  rounded-full border-2 bg-white border-black " onClick={scroll}>
         <BiUpArrowAlt className="w-8 h-8 text-blue-600" />
       </button>

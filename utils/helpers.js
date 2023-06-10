@@ -29,7 +29,7 @@ export const uploadImage = async (filePath) => {
 export const sendEmail = async ({ name, email, link, template }) => {
   try {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
+    
     const msg = {
       to: email,
       from: { email: "noreply.pestbytes@gmail.com", name: "PestBytes" },
@@ -39,8 +39,8 @@ export const sendEmail = async ({ name, email, link, template }) => {
       },
       template_id: template,
     };
-
-    return sgMail.send(msg);
+    await sgMail.send(msg);
+    return true;
   } catch (error) {
     console.log(error);
     return false;

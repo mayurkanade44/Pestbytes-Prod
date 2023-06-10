@@ -18,6 +18,7 @@ import { SingleBlogSkeleton } from "../components/skeletons";
 import { useEffect, useState } from "react";
 import { setSearch, toggleModal } from "../redux/authSlice";
 import ad from "../assets/verticalAd.jpg";
+import AdModal from "../components/modals/AdModal";
 
 const SingleBlog = () => {
   const { id } = useParams();
@@ -28,6 +29,7 @@ const SingleBlog = () => {
   const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -63,6 +65,10 @@ const SingleBlog = () => {
       })
     );
     navigate(`/all-blogs`);
+  };
+
+  const onClose = () => {
+    setOpen(false);
   };
 
   if (isLoading) return <SingleBlogSkeleton />;
@@ -161,7 +167,17 @@ const SingleBlog = () => {
             posts={latest?.blogs}
             className="mt-8 lg:mt-0 lg:max-w-xs"
           />
-          <img src={ad} className="w-full lg:w-80 h-60 my-5" />
+          <button onClick={() => setOpen(!open)}>
+            <img
+              src={ad}
+              className="w-full lg:w-80 h-60 my-5 border-2 border-gray-500"
+            />
+            <img
+              src={ad}
+              className="hidden lg:block w-full lg:w-80 h-96 my-8 border-2 border-gray-500"
+            />
+          </button>
+          <AdModal onClose={onClose} open={open} />
           {/* <div className="mt-7">
             <h2 className="font-roboto font-medium text-dark-hard mb-4 md:text-xl">
               Share on:

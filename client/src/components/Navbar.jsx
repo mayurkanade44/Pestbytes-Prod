@@ -1,6 +1,15 @@
 import { useState } from "react";
 import logo from "../assets/logo1.jpg";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import {
+  AiOutlineMenu,
+  AiOutlineClose,
+  AiOutlineHome,
+  AiOutlineSearch,
+  AiOutlineUser,
+  AiOutlineProfile,
+} from "react-icons/ai";
+import { BiMessageAltAdd } from "react-icons/bi";
+import { FaRegUserCircle } from "react-icons/fa";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +23,8 @@ const navItemsInfo = [
   { name: "About Us", type: "link", href: "/about-pestbytes" },
   { name: "Contact Us", type: "link", href: "/" },
 ];
+
+const mobileNav = [{ name: "Home", href: "/" }];
 
 const NavItems = ({ name, href, setNavIsVisible }) => {
   return (
@@ -52,34 +63,105 @@ const Navbar = () => {
       dispatch(logout());
       toast.success(res.msg);
       navigate("/");
-      navVisibilityHandler();
     } catch (error) {
       console.log(error);
     }
   };
 
+  const [active, setActive] = useState(0);
+
   const addBlog = () => {
+    if (!user) {
+      toast.error("Please login to add the blog");
+      dispatch(toggleModal({ register: false, login: true }));
+      return;
+    }
+
     dispatch(setNewBlog({ status: true, blogId: "", showCategory: true }));
-    navVisibilityHandler();
     navigate("/add-blog");
   };
   return (
     <section className="sticky top-0 left-0 right-0 z-50 bg-white shadow-sm border-b-[1px]">
-      <header className="container mx-auto px-5 flex justify-between py-4 items-center">
+      <header className="container mx-auto px-5 flex justify-between py-2 md:py-4 items-center">
         <div>
           <Link to="/">
             <img src={logo} className="w-12 logo" alt="logo" />
           </Link>
         </div>
         <div className="lg:hidden z-50">
-          {navIsVisible ? (
+          {user ? (
+            <button
+              type="button"
+              onClick={logoutHandler}
+              className="border-2 border-red-500 px-4 py-1 rounded-full text-red-500 font-semibold"
+            >
+              Logout
+            </button>
+          ) : (
+            <button
+              onClick={() =>
+                dispatch(toggleModal({ register: false, login: true }))
+              }
+              className="border-2 border-blue-500 px-4 py-1 rounded-full text-blue-500 font-semibold"
+            >
+              Log In
+            </button>
+          )}
+
+          {/* {navIsVisible ? (
             <AiOutlineClose
               className="w-6 h-6"
               onClick={navVisibilityHandler}
             />
           ) : (
             <AiOutlineMenu className="w-6 h-6" onClick={navVisibilityHandler} />
-          )}
+          )} */}
+          <div className="fixed bottom-0 right-0 bg-gray-400 w-full h-14 px-4">
+            <ul className="flex justify-between">
+              <li className="text-white p-1">
+                <Link to="/">
+                  <div className="flex justify-center">
+                    <AiOutlineHome className="h-6 w-10 " />
+                  </div>
+                  Home
+                </Link>
+              </li>
+              <li className="text-white p-1">
+                <Link to="/all-blogs">
+                  <div className="flex justify-center">
+                    <AiOutlineSearch className="h-6 w-10" />
+                  </div>
+                  Blogs
+                </Link>
+              </li>
+              <li className="text-white p-1">
+                <button onClick={addBlog} type="button">
+                  <div className="flex justify-center">
+                    <BiMessageAltAdd className="h-6 w-10" />
+                  </div>
+                  Add Blog
+                </button>
+              </li>
+              <li className="text-white p-1">
+                <Link to="/about-pestbytes">
+                  <div className="flex justify-center">
+                    <AiOutlineProfile className="h-6 w-10" />
+                  </div>
+                  About
+                </Link>
+              </li>
+              {user && (
+                <li className="text-white p-1">
+                  <Link to={`/profile/${user.userId}`}>
+                    <div className="flex justify-center">
+                      <FaRegUserCircle className="h-6 w-10" />
+                    </div>
+                    Profile
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </div>
         </div>
         <div
           className={`${

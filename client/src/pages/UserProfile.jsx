@@ -1,4 +1,4 @@
-import BlogCard from "../components/BlogCard";
+import BlogCard from "../components/blogCards/BlogCard";
 import { useSelector } from "react-redux";
 import { useGetUserProfileQuery } from "../redux/userSlice";
 import { useParams } from "react-router-dom";

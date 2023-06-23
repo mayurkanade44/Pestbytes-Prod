@@ -1,9 +1,9 @@
 import { useAllBlogsQuery } from "../redux/blogSlice";
-import BlogCard from "./BlogCard";
+import BlogCard from "./blogCards/BlogCard";
 import { FaArrowRight } from "react-icons/fa";
 
 const Blogs = () => {
-  const { data: blogs, isLoading, refetch } = useAllBlogsQuery()
+  const { data: blogs, isLoading, refetch } = useAllBlogsQuery();
 
   return (
     <section className="flex flex-col container mx-auto px-5 py-5">

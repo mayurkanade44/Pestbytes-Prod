@@ -14,6 +14,7 @@ const BlogSchema = new mongoose.Schema(
     body: { type: String, required: true },
     coverPicture: { type: String, require: true },
     comments: [CommentSchema],
+    viewCount: { type: Number, default: 0 },
     category: [
       {
         value: { type: mongoose.Types.ObjectId, ref: "Admin", required: true },

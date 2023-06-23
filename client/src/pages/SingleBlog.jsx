@@ -12,7 +12,12 @@ import {
 } from "../redux/blogSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdCalendarMonth } from "react-icons/md";
-import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
+import {
+  AiFillHeart,
+  AiOutlineHeart,
+  AiOutlineShareAlt,
+  AiOutlineEye,
+} from "react-icons/ai";
 import { toast } from "react-toastify";
 import { SingleBlogSkeleton } from "../components/skeletons";
 import { useEffect, useState } from "react";
@@ -106,8 +111,11 @@ const SingleBlog = () => {
                 </div>
               </div>
               <span className="font-bold flex text-dark-light italic text-sm md:text-base">
+                <h6 className="text-[13px] text-center mr-4">
+                  {blog?.viewCount} <AiOutlineEye className="h-4 w-4" />
+                </h6>
                 <AiOutlineShareAlt
-                  className="w-7 h-7 mt-0.5 mr-4 text-black hover:cursor-pointer"
+                  className="w-7 h-7 mt-2 mr-4 text-black hover:cursor-pointer"
                   onClick={() => setShare(!share)}
                 />
                 <button type="button" onClick={handleLike}>
@@ -178,15 +186,6 @@ const SingleBlog = () => {
             />
           </button>
           <AdModal onClose={onClose} open={open} />
-          {/* <div className="mt-7">
-            <h2 className="font-roboto font-medium text-dark-hard mb-4 md:text-xl">
-              Share on:
-            </h2>
-            <SocialShare
-              url={encodeURI(`https://pestbytes.com/blog/${blog?._id}`)}
-              title={encodeURIComponent(`Pestbytes - ${blog?.title}`)}
-            />
-          </div> */}
         </div>
       </section>
     </div>

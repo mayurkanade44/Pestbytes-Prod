@@ -2,10 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { setNewBlog } from "../redux/authSlice";
+import { setNewBlog } from "../../redux/authSlice";
 import { toast } from "react-toastify";
-import { useDeleteBlogMutation } from "../redux/blogSlice";
-import DeleteModal from "../components/modals/DeleteModal";
+import { useDeleteBlogMutation } from "../../redux/blogSlice";
+import DeleteModal from "../modals/DeleteModal";
 import { useState } from "react";
 
 const BlogCard = ({ blog, className, profile, refetch }) => {

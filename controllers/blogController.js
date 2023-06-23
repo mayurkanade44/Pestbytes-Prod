@@ -54,6 +54,9 @@ export const getSingleBlog = async (req, res) => {
 
     if (!blog) return res.status(404).json({ msg: "Blog not found" });
 
+    blog.viewCount += 2;
+    await blog.save();
+
     return res.status(200).json(blog);
   } catch (error) {
     console.log(error);

@@ -33,7 +33,7 @@ const BlogRow = ({ title, blogs }) => {
           )}
 
           <div
-            className="flex items-center space-x-0.5 md:mx-3 scrollbar-hide overflow-x-scroll md:space-x-2.5 md:p-2"
+            className="flex items-center space-x-0.5 md:mx-3 scrollbar-hide overflow-x-scroll md:space-x-4 md:p-2"
             ref={rowRef}
           >
             {blogs?.map((blog) => (

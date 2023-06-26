@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div>
+    <div className="mt-4">
       <footer className=" bg-dark-hard p-6">
         <div className="container mx-auto grid grid-cols-1 px-2 gap-y-5 gap-x-5 md:grid-cols-2 lg:grid-cols-2 lg:gap-x-10">
           <div className="md:order-first">

@@ -1,9 +1,14 @@
 import { useRef } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import BlogRowCard from "./BlogRowCard";
+import { useDispatch } from "react-redux";
+import { setSearch } from "../../redux/authSlice";
+import { useNavigate } from "react-router-dom";
 
-const BlogRow = ({ title, blogs }) => {
+const BlogRow = ({ title, id, blogs }) => {
   const rowRef = useRef(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClick = (direction) => {
     if (rowRef.current) {
@@ -17,12 +22,31 @@ const BlogRow = ({ title, blogs }) => {
       rowRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
     }
   };
+
+  const searchCategory = ({ category, name }) => {
+    dispatch(
+      setSearch({
+        title: "",
+        category: category,
+        name: name,
+      })
+    );
+    navigate(`/all-blogs`);
+  };
   return (
     <div className="container mx-auto px-5 ">
       <div className="space-y-1 md:space-y-2">
-        <h2 className="w-56 mt-4 md:ml-2 cursor-pointer text-sm font-semibold text-[#534f4f] transition duration-200 hover:text-black md:text-2xl">
+        <button
+          onClick={() =>
+            searchCategory({
+              category: id,
+              name: title,
+            })
+          }
+          className="md:ml-3 mx-0 cursor-pointer text-sm font-semibold text-[#534f4f] transition duration-200 hover:text-black md:text-2xl"
+        >
           {title}
-        </h2>
+        </button>
 
         <div className="group relative md:ml-2">
           {blogs?.length > 3 && (

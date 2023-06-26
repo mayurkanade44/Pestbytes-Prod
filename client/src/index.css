@@ -77,3 +77,9 @@
 .logo:hover {
   transform: scale(2);
 }
+
+@media (max-width: 767px) {
+  .logo:hover {
+    transform: none;
+  }
+}

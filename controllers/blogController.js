@@ -120,52 +120,41 @@ export const getAllBlogs = async (req, res) => {
       .sort("-createdAt")
       .limit(8);
 
-    const cockroach = await Blog.find({
-      category: {
-        $elemMatch: {
-          value: new mongoose.Types.ObjectId("646b40162ce0bb21a57968fa"),
-        },
-      },
-    })
-      .populate({
-        path: "user",
-        select: "name avatar createdAt",
-      })
-      .sort("-createdAt")
-      .select("-body -comments -likes")
-      .limit(8);
+    const topCategories = [
+      "646c954d0053b184c58edec6",
+      "646b40162ce0bb21a57968fa",
+      "646c95090053b184c58edebe",
+      "646c95240053b184c58edec0",
+    ];
 
-    const termite = await Blog.find({
-      category: {
-        $elemMatch: {
-          value: new mongoose.Types.ObjectId("646c95240053b184c58edec0"),
-        },
-      },
-    })
-      .populate({
-        path: "user",
-        select: "name avatar createdAt",
-      })
-      .sort("-createdAt")
-      .select("-body -comments -likes")
-      .limit(8);
+    const topCategoriesBlogs = [];
 
-    const mosquito = await Blog.find({
-      category: {
-        $elemMatch: {
-          value: new mongoose.Types.ObjectId("646c95090053b184c58edebe"),
+    for (let top of topCategories) {
+      const blogs = await Blog.find({
+        category: {
+          $elemMatch: {
+            value: new mongoose.Types.ObjectId(top),
+          },
         },
-      },
-    })
-      .populate({
-        path: "user",
-        select: "name avatar createdAt",
       })
-      .sort("-createdAt")
-      .select("-body -comments -likes")
-      .limit(8);
+        .populate({
+          path: "user",
+          select: "name avatar createdAt",
+        })
+        .sort("-createdAt")
+        .select("-body -comments -likes")
+        .limit(8);
 
-    res.json({ blogs, cockroach, termite, mosquito });
+      topCategoriesBlogs.push(blogs);
+    }
+
+    res.json({
+      blogs,
+      rodent: topCategoriesBlogs[0],
+      cockroach: topCategoriesBlogs[1],
+      mosquito: topCategoriesBlogs[2],
+      termite: topCategoriesBlogs[3],
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: "Server error, try again later." });

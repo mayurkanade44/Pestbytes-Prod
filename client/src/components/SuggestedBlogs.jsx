@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PopularTags from "./PopularTags";
 
 const SuggestedBlogs = ({ className, header, posts = [] }) => {
@@ -10,7 +11,8 @@ const SuggestedBlogs = ({ className, header, posts = [] }) => {
       </h2>
       <div className="grid gap-y-5 mt-5 md:grid-cols-3 md:gap-x-5 lg:grid-cols-1">
         {posts.slice(0, 3).map((item) => (
-          <div
+          <Link
+            to={`/blog/${item._id}`}
             key={item._id}
             className="flex space-x-3 flex-nowrap items-center"
           >
@@ -31,7 +33,7 @@ const SuggestedBlogs = ({ className, header, posts = [] }) => {
                 })}
               </span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       <h2 className="font-roboto font-medium text-dark-hard mt-8 md:text-xl">
